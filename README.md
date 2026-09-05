@@ -6,12 +6,13 @@
 
 - [lark-handoff 技能](.agents/skills/lark-handoff/SKILL.md)：手动或 Scheduled 任务调用同一个入口。
 - [状态契约](.agents/skills/lark-handoff/references/contract.md)：六阶段定义、授权边界和项目映射。
+- [多 Agent 调度](.agents/skills/lark-handoff/references/dispatch.md)：任务分配、并发边界和执行者收尾。
 - [执行流程](.agents/skills/lark-handoff/references/execution.md)：开发、验收交付、合并及异常处理。
 - [飞书接口](.agents/skills/lark-handoff/references/lark.md)：读取、自定义状态更新、评论和权限。
 - [审计与恢复](.agents/skills/lark-handoff/references/audit.md)：评论格式、运行锁、幂等恢复。
 - [Scheduled 运行说明](docs/scheduled.md)：启动条件与可复制的任务提示词。
 
-工作流由 Codex 按技能执行；本项目不提供独立常驻服务。
+主 Agent 负责调度，每个 sub-agent 执行一个飞书任务；独立开发任务可并行，同远端仓库合并串行。工作流由 Codex 按技能执行；本项目不提供独立常驻服务。
 
 ## 本机设置
 

@@ -53,4 +53,4 @@ Agent 只主动设置 `ready-to-review`、`need-to-refine`、`done`。其他状�
 
 新分支使用 `codex/<type>/<task-guid>-<slug>`，如 `codex/feature/0963b6bf-871c-4919-a5ca-8542153adc92-card-id-suffix`。`type` 从内容判断为 `feature`、`fix`、`refactor`、`docs`、`test` 或 `chore`，slug 用简短 ASCII kebab-case。明确备注的分支约定优先。任务 GUID 固定身份；标题变化不新建分支，优先恢复审计中已记录的分支。
 
-每个任务使用独立 Git worktree。审计记录真实仓库、工作树、分支和基线 SHA；遵循目标项目适用的 `AGENTS.md`。本交接仓库不替代目标代码项目。
+主 Agent 调度、sub-agent 执行单个飞书任务，授权范围和状态转换不因委派而扩大；并发与写入归属见 [dispatch.md](dispatch.md)。每个任务使用独立 Git worktree。审计记录真实仓库、工作树、分支和基线 SHA；遵循目标项目适用的 `AGENTS.md`。本交接仓库不替代目标代码项目。
