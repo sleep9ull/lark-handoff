@@ -8,8 +8,7 @@
 | --- | --- |
 | 读取清单 | `task:tasklist:read` |
 | 读取任务详情 | `task:task:read` |
-| 读取分组名称 | `task:section:read` |
-| 读取状态字段及选项 | `task:custom_field:read` |
+| 读取状态、所属项目字段及选项 | `task:custom_field:read` |
 | 读取审计评论 | `task:comment:read` |
 | 添加执行评论 | `task:comment:write` |
 | 更新任务上的自定义字段值 | `task:task:write`（以当前 patch schema 为准） |
@@ -27,7 +26,7 @@
 ```bash
 lark-cli schema task.tasklists.tasks
 lark-cli schema task.tasks.get
-lark-cli schema task.sections.list
+lark-cli schema task.custom_fields.list
 lark-cli schema task.custom_fields.get
 ```
 
@@ -36,11 +35,13 @@ lark-cli schema task.custom_fields.get
 ```bash
 lark-cli task tasklists tasks --as user --tasklist-guid '<清单 GUID>' --page-size 100
 lark-cli task tasks get --as user --task-guid '<任务 GUID>'
-lark-cli task sections list --as user --resource-type tasklist --resource-id '<清单 GUID>' --page-size 100
+lark-cli task custom_fields list --as user --resource-type tasklist --resource-id '<清单 GUID>' --page-size 100
 lark-cli task custom_fields get --as user --custom-field-guid '<字段 GUID>'
 ```
 
-所有列表检查 `has_more`，用 `page_token` 继续直到结束。任何分页失败都不是“没有任务”。扫描整个指定清单，不用「分配给我」列表替代，任务是否执行由清单范围和规范状态共同决定。执行候选取详情中的 `custom_fields`、当前清单的 `tasklists[].section_guid`、描述、依赖和 `updated_at`。
+所有列表检查 `has_more`，用 `page_token` 继续直到结束。任何分页失败都不是“没有任务”。扫描整个指定清单，不用「分配给我」列表替代，任务是否执行由清单范围和规范状态共同决定。执行候选取详情中的 `custom_fields`（含「任务状态」和「所属项目」的值）、清单归属、描述、依赖和 `updated_at`。
+
+完整列取当前配置清单的自定义字段，按名称精确匹配唯一的「所属项目」，保留字段 GUID 与类型，再从任务 `custom_fields` 按 GUID 取值。文本类型取非空文本；单选类型将值 GUID 解析为字段定义中的有效选项名称；多选类型仅在恰好选择一个有效选项时取得唯一名称。按当前 schema 核对实际值结构，不把选项 GUID 当作项目名称。字段重名、缺失、类型不支持或权限不足时预检不通过；任务值为空、选项未知/隐藏、名称歧义或多项目时按契约报告待澄清。项目字段只读，不自动创建或修改定义、选项及任务值；无需读取分组。
 
 CLI 当前没有列取评论封装时，按 `lark-openapi-explorer` 核对[官方评论列表规范](https://open.feishu.cn/document/task-v2/comment/list.md)，再用：
 

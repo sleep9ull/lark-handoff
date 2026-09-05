@@ -1,6 +1,6 @@
 ---
 name: lark-handoff
-description: 从飞书 handoff 清单接管 ready-for-agent 任务，在分组对应的本地 Git 项目中开发交付；处理人类验收后的 ready-to-merge 任务并回写评论审计。支持执行前的只读预检。
+description: 从飞书 handoff 清单接管 ready-for-agent 任务，在任务「所属项目」对应的本地 Git 项目中开发交付；处理人类验收后的 ready-to-merge 任务并回写评论审计。支持执行前的只读预检。
 ---
 
 # 飞书任务交接
@@ -10,7 +10,7 @@ description: 从飞书 handoff 清单接管 ready-for-agent 任务，在分组�
 ## 每轮入口
 
 1. 读取 [contract.md](references/contract.md)，区分只读预检与执行一轮。只读预检仅报告发现，不写任务、评论、锁或项目文件。
-2. 按 [lark.md](references/lark.md) 预检身份、字段和权限，完整分页读取指定清单、任务详情和分组。以自定义「任务状态」解析规范状态，保留原始名称和 GUID。未知状态或配置冲突须报告，不能凭标题或评论推测。
+2. 按 [lark.md](references/lark.md) 预检身份、字段和权限，完整分页读取指定清单、任务详情和自定义字段定义。以自定义「任务状态」解析规范状态，保留原始名称和 GUID。未知状态或配置冲突须报告，不能凭标题或评论推测。
 3. 执行模式先按 [audit.md](references/audit.md) 获得本机清单运行锁，恢复待回写记录，再筛选 `ready-for-agent` 与 `ready-to-merge`。恢复只补齐已发生操作的审计，不在其他状态启动新的开发或合并。
 4. 主 Agent 对候选任务读取全部评论，解析并验证项目位置，按 [dispatch.md](references/dispatch.md) 将每个飞书任务分配给一个 sub-agent；独立任务在可用并发额度内执行，其余排队。只读预检不派发执行者。
 5. sub-agent 开始前重新读取状态与任务内容，确认仍满足触发条件，按 [execution.md](references/execution.md) 对应分支执行，按 [audit.md](references/audit.md) 完成评论和状态回读。人类中途撤回或修改要求时保存现场并停止该项操作。成功、失败、低置信度、阻塞都要有审计结果；权限导致无法评论时保留本地待回写记录并报告。
