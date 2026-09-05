@@ -2,12 +2,12 @@
   "tasklist_guid": "0d80a578-dbcb-4de3-89a5-e93461956b44",
   "status_field_guid": "8bd9a77c-83c0-4174-a561-b772ae1c5bdc",
   "status_aliases": {
-    "draft": ["draft", "新创建"],
-    "ready-for-agent": ["ready-for-agent", "可执行"],
-    "ready-for-review": ["ready-for-review", "ready-to-review", "待验收"],
+    "draft": ["draft"],
+    "ready-for-agent": ["ready-for-agent"],
+    "ready-to-review": ["ready-to-review"],
     "need-to-refine": ["need-to-refine"],
     "ready-to-merge": ["ready-to-merge"],
     "merged": ["merged"],
-    "done": ["done", "已完成"]
+    "done": ["done"]
   }
 }

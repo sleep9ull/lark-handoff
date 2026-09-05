@@ -6,7 +6,7 @@
 
 1. Codex 能访问本交接仓库、项目技能、`lark-cli` 登录态和目标代码仓库；有 Git 提交身份与既有远端访问权限。
 2. 从 `handoff.local.example.json` 建立本机配置。`projects` 用分组名精确映射绝对路径；不需要精确映射时可设为 `{}`，由 `project_roots` 下的目录名定位。示例路径需替换，未配置时不启动开发。
-3. 自定义状态字段覆盖七阶段且无别名冲突；读取分组、读取/写入评论、更新任务字段值的权限可用。按 [接口文档](../.agents/skills/lark-handoff/references/lark.md)预检。
+3. 自定义状态字段覆盖七阶段且名称精确匹配、无重复选项；读取分组、读取/写入评论、更新任务字段值的权限可用。按 [接口文档](../.agents/skills/lark-handoff/references/lark.md)预检。
 4. 对真实清单做一次只读预检，确认两类候选、完整分页和分组路径。人工核对目标仓库与 remote 后再启动执行模式。
 5. 默认只配置一个主机上的一个定时入口。状态目录固定在用户目录，不随 Scheduled 使用的 checkout/worktree 变化；无人值守运行须能执行已授权动作，实际审批门禁仍需报告并停止。
 
@@ -28,7 +28,7 @@ Codex 配置 Scheduled 时，选择本仓库作为入口。频率由用户设置
 
 ## 人类验收
 
-开发结果到达 `ready-for-review` 后，按任务评论的验收指引检查**所记录的提交**，通过后手动改为 `ready-to-merge`。要求返工时补充评论并改为 `ready-for-agent`。
+开发结果到达 `ready-to-review` 后，按任务评论的验收指引检查**所记录的提交**，通过后手动改为 `ready-to-merge`。要求返工时补充评论并改为 `ready-for-agent`。
 
 `need-to-refine` 必须看具体阻塞或验证缺口。澄清后可再次交接；如直接批准已有成果，先确认评论中已有可验收提交。
 

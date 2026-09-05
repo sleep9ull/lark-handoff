@@ -5,13 +5,13 @@
 | 输入场景 | 应有结果 |
 | --- | --- |
 | 状态为 `draft`，评论含 `/可执行` | 跳过，不创建分支或评论 |
-| 状态为 `ready-for-agent`，项目分组唯一、验收明确 | 独立分支/worktree 开发、验证、提交、推送分支，评论后转入 `ready-for-review` |
-| 任务字段名称是「可执行」，配置映射唯一 | 与 `ready-for-agent` 同一流程 |
-| 同时存在 `ready-for-agent` 和「可执行」两个有效选项 | 配置冲突，停止执行并报告 |
+| 状态为 `ready-for-agent`，项目分组唯一、验收明确 | 独立分支/worktree 开发、验证、提交、推送分支，评论后转入 `ready-to-review` |
+| 任务状态选项名称是「可执行」 | 视为未知状态并报告，不作为 `ready-for-agent` 执行 |
+| 存在两个名称均为 `ready-for-agent` 的有效选项 | 配置冲突，停止执行并报告 |
 | 缺少状态选项、分组权限或评论权限 | 上线预检不通过，不静默跳过元数据后执行 |
 | 分组名匹配两个不同本地仓库 | 记录需明确路径，进入 `need-to-refine`，不猜项目 |
 | 实现后有必须检查未通过 | 保留成果与证据，进入 `need-to-refine` |
-| `ready-for-review` / `need-to-refine` / `merged` / `done` | 不启动新开发或合并 |
+| `ready-to-review` / `need-to-refine` / `merged` / `done` | 不启动新开发或合并 |
 | `ready-to-merge`，分支 HEAD 等于已交付 SHA | 验证合并、确认远端 main 含批准提交、评论后转入 `merged` |
 | `ready-to-merge`，分支有额外提交或没有交付 SHA | 不合并，记录具体问题并进入 `need-to-refine` |
 | 合并已推送，评论或状态更新失败 | 下轮核实远端后仅恢复回写，不再次创建合并 |

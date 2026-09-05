@@ -18,7 +18,7 @@
 
 加载 `handoff.json` 中字段 GUID 的定义后，确认类型为 `single_select`。将未隐藏的选项名称按 `status_aliases` 精确映射为七个规范状态；每个状态必须恰好对应一个有效选项，且一个选项只属于一个状态。缺失、重复或字段类型变化时只做诊断，不启动执行。读写使用本轮解析到的 GUID。
 
-2026-09-05 读取到「新创建、可执行、待验收、已完成」四个选项，配置分别兼容为 `draft`、`ready-for-agent`、`ready-for-review`、`done`。上线前还需添加 `need-to-refine`、`ready-to-merge`、`merged` 三个选项，或直接使用完整七个英文名称；避免同时保留同一规范状态的两个别名选项。以实际接口结果为准。
+状态名称固定为 `draft`、`ready-for-agent`、`ready-to-review`、`need-to-refine`、`ready-to-merge`、`merged`、`done`。不兼容旧英文拼写或中文选项名；隐藏选项不参与有效状态映射。以实际接口结果核对配置。
 
 ## 读取流程
 

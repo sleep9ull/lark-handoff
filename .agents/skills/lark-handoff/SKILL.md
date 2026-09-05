@@ -18,7 +18,7 @@ description: 从飞书 handoff 清单接管 ready-for-agent 任务，在分组�
 
 ## 完成标准
 
-- `ready-for-agent`：交付可检查的任务分支与提交、相关验证结果、验收指引；转入 `ready-for-review`，或说明不确定性后转入 `need-to-refine`。
+- `ready-for-agent`：交付可检查的任务分支与提交、相关验证结果、验收指引；转入 `ready-to-review`，或说明不确定性后转入 `need-to-refine`。
 - `ready-to-merge`：确认批准对应的提交已进入远端 `origin/main`，评论合并证据并转入 `merged`。
 - 具体转换、授权和例外以状态契约为准；状态更新与评论不是原子操作，完成前必须核对两者。
 

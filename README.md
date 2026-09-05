@@ -25,7 +25,7 @@
 
 4. 对照[飞书接口说明](.agents/skills/lark-handoff/references/lark.md)补齐权限和状态选项，再进行一次只读预检。
 
-[handoff.json](handoff.json) 保存清单、状态字段和兼容名称。本机配置不提交；凭据由 `lark-cli` 管理。
+[handoff.json](handoff.json) 保存清单、状态字段和七个精确状态名称。本机配置不提交；凭据由 `lark-cli` 管理。
 
 当前绑定的是本人 `handoff` 清单，GUID 与原 `codex-handoff` 相同。状态选项 GUID 每次从接口解析，不保存在配置中。
 

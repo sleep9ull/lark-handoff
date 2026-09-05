@@ -2,19 +2,19 @@
 
 ## 状态的唯一来源
 
-读取 `handoff.json` 指定的自定义单选字段。以下名称是规范状态；配置中的中文名称只是兼容别名。`*` 表示会触发自动工作，不是选项名称的一部分。
+读取 `handoff.json` 指定的自定义单选字段。以下七个英文名称是唯一有效状态，按名称精确匹配；`status_aliases` 中每个数组只包含与键相同的一个名称。`*` 表示会触发自动工作，不是选项名称的一部分。
 
 | 状态 | 含义 | 谁推进下一步 |
 | --- | --- | --- |
 | `draft` | 用户已建任务，交接细节尚未完善 | 人类补齐后改为 `ready-for-agent` |
-| `ready-for-agent` * | 已允许 Agent 接管任务 | Agent 开发后改为 `ready-for-review` 或 `need-to-refine` |
-| `ready-for-review` | 已在任务分支完成实现、提交代码，等待人类验收 | 人类验收后改为 `ready-to-merge`；需返工时补充要求并改为 `ready-for-agent` |
+| `ready-for-agent` * | 已允许 Agent 接管任务 | Agent 开发后改为 `ready-to-review` 或 `need-to-refine` |
+| `ready-to-review` | 已在任务分支完成实现、提交代码，等待人类验收 | 人类验收后改为 `ready-to-merge`；需返工时补充要求并改为 `ready-for-agent` |
 | `need-to-refine` | Agent 对结果置信度不足，或缺少完成所需的明确条件 | 人类澄清后改为 `ready-for-agent`；若验收已有具体提交，也可改为 `ready-to-merge` |
 | `ready-to-merge` * | 人类已验收，授权合并已验收的提交 | Agent 合并并确认远端结果后改为 `merged` |
 | `merged` | 已验收代码进入 `origin/main`，等待用户检查合并结果 | 人类改为 `done` |
 | `done` | 用户最终确认完成 | 无自动动作 |
 
-Agent 只主动设置 `ready-for-review`、`need-to-refine`、`merged`。其他状态由人类管理。不会自行设置 `ready-for-agent` 或 `ready-to-merge` 获得授权，也不会代替用户设置 `done`。
+Agent 只主动设置 `ready-to-review`、`need-to-refine`、`merged`。其他状态由人类管理。不会自行设置 `ready-for-agent` 或 `ready-to-merge` 获得授权，也不会代替用户设置 `done`。
 
 飞书基础 `status=todo/done`、`completed_at` 与此七阶段流程不同。Agent 仅更新指定自定义字段，不调用基础完成接口。基础任务已经完成却仍标记可执行时，报告状态冲突并跳过。
 
