@@ -16,9 +16,9 @@
 
 更新任务的字段**值**与修改字段**定义/选项**不同；本技能不自动创建字段或更改选项。检查 `lark-cli auth status --json --verify`，还需实际只读调用确认资源可访问。写入前检查对应 schema 和已授权 scopes；不要通过发送测试评论来验证权限。
 
-加载 `handoff.json` 中字段 GUID 的定义后，确认类型为 `single_select`。将未隐藏的选项名称按 `status_aliases` 精确映射为七个规范状态；每个状态必须恰好对应一个有效选项，且一个选项只属于一个状态。缺失、重复或字段类型变化时只做诊断，不启动执行。读写使用本轮解析到的 GUID。
+加载 `handoff.json` 中字段 GUID 的定义后，确认类型为 `single_select`。将未隐藏的选项名称按 `status_aliases` 精确映射为六个规范状态；每个状态必须恰好对应一个有效选项，且一个选项只属于一个状态。缺失、重复或字段类型变化时只做诊断，不启动执行。读写使用本轮解析到的 GUID。
 
-状态名称固定为 `draft`、`ready-for-agent`、`ready-to-review`、`need-to-refine`、`ready-to-merge`、`merged`、`done`。不兼容旧英文拼写或中文选项名；隐藏选项不参与有效状态映射。以实际接口结果核对配置。
+状态名称固定为 `draft`、`ready-for-agent`、`ready-to-review`、`need-to-refine`、`ready-to-merge`、`done`。不兼容旧英文拼写或中文选项名；隐藏选项不参与有效状态映射。以实际接口结果核对配置。
 
 ## 读取流程
 

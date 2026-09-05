@@ -7,7 +7,6 @@
     "ready-to-review": ["ready-to-review"],
     "need-to-refine": ["need-to-refine"],
     "ready-to-merge": ["ready-to-merge"],
-    "merged": ["merged"],
     "done": ["done"]
   }
 }
