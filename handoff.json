@@ -4,7 +4,7 @@
   "status_aliases": {
     "draft": ["draft", "新创建"],
     "ready-for-agent": ["ready-for-agent", "可执行"],
-    "ready-for-review": ["ready-for-review", "待验收"],
+    "ready-for-review": ["ready-for-review", "ready-to-review", "待验收"],
     "need-to-refine": ["need-to-refine"],
     "ready-to-merge": ["ready-to-merge"],
     "merged": ["merged"],
