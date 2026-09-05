@@ -1,0 +1,6 @@
+{
+  "project_roots": ["/absolute/path/to/projects"],
+  "projects": {
+    "example-project": "/absolute/path/to/example-project"
+  }
+}
