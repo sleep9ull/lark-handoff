@@ -2,3 +2,20 @@
 /task-read-auth.png
 /custom-field-read-auth.png
 /handoff.local.json
+
+# Agent 本地缓存、日志和会话产物（保留技能与项目配置）
+.codex/tmp/
+.codex/log/
+.codex/logs/
+.codex/sessions/
+.codex/archived_sessions/
+.codex/history.jsonl
+.codex/session_index.jsonl
+.codex/state_*.sqlite*
+
+# 浏览器自动化临时文件与测试报告
+.playwright*
+playwright-report/
+blob-report/
+test-results/
+/card-id-session.png
